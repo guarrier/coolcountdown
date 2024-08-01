@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('custom-font.otf') format('opentype');
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('photo.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        #title {
+            font-family: 'CustomFont', Arial, sans-serif;
+            color: #d7cfc7;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #countdown {
+            font-family: 'CustomFont', Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #d7cfc7;
+            font-size: 2em;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-label {
+            font-size: 0.8em;
+            margin-bottom: 10px; /* Add space between the label and value */
+        }
+
+        .time-value {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">Floor 2 Countdown</div>
+    <div id="countdown">
+        <div class="time-unit">
+            <div class="time-label">Week</div>
+            <div id="weeks" class="time-value">0</div>
+        </div>
+        <div class="time-unit">
+            <div class="time-label">Day</div>
+            <div id="days" class="time-value">0</div>
+        </div>
+        <div class="time-unit">
+            <div class="time-label">Hour</div>
+            <div id="hours" class="time-value">0</div>
+        </div>
+        <div class="time-unit">
+            <div class="time-label">Minute</div>
+            <div id="minutes" class="time-value">0</div>
+        </div>
+        <div class="time-unit">
+            <div class="time-label">Second</div>
+            <div id="seconds" class="time-value">0</div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const eventDate = new Date('August 30, 2024 00:00:00');
+            const currentTime = now.getTime();
+            const eventTime = eventDate.getTime();
+            const remainingTime = eventTime - currentTime;
+
+            const seconds = Math.floor(remainingTime / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const weeks = Math.floor(days / 7);
+
+            const remainingSeconds = seconds % 60;
+            const remainingMinutes = minutes % 60;
+            const remainingHours = hours % 24;
+            const remainingDays = days % 7;
+
+            document.getElementById('weeks').textContent = weeks;
+            document.getElementById('days').textContent = remainingDays;
+            document.getElementById('hours').textContent = remainingHours;
+            document.getElementById('minutes').textContent = remainingMinutes;
+            document.getElementById('seconds').textContent = remainingSeconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
